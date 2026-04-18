@@ -7,62 +7,150 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap"
       rel="stylesheet"
     />
     <link rel="stylesheet" href="./styles.css" />
   </head>
   <body>
+    <div class="ambient ambient-left"></div>
+    <div class="ambient ambient-right"></div>
+
     <div class="page-shell">
       <header class="hero">
-        <div class="hero-copy">
+        <section class="hero-copy panel">
           <span class="eyebrow">Emergency Room Intelligence</span>
           <h1>ER-Predict</h1>
-          <p>
-            Find nearby hospitals worldwide and compare smart ER wait time
-            estimates instantly in a static app built for GitHub Pages.
+          <p class="hero-text">
+            Search a city or address anywhere in the world, compare nearby emergency
+            hospitals, and see smarter wait-time and cost estimates in one flowing
+            view.
           </p>
-        </div>
-        <div class="hero-panel">
-          <div class="hero-stat">
-            <strong>Top 5</strong>
-            <span>Nearby hospitals surfaced from public map data</span>
+
+          <div class="hero-badges">
+            <span>Worldwide location search</span>
+            <span>Top 5 nearby ER options</span>
+            <span>Wait + insurance cost view</span>
           </div>
-          <div class="hero-stat">
-            <strong>No Backend</strong>
-            <span>Runs entirely in the browser with no API keys</span>
+        </section>
+
+        <aside class="hero-side panel">
+          <div class="spotlight-card">
+            <span class="spotlight-label">Fastest Decision Flow</span>
+            <strong>Search. Compare. Go.</strong>
+            <p>
+              Designed to surface the quickest nearby ER options first, with travel,
+              urgency, and insurance context built in.
+            </p>
           </div>
-        </div>
+
+          <div class="quick-stats">
+            <div class="quick-stat">
+              <strong id="hero-hospital-count">5</strong>
+              <span>Results ranked</span>
+            </div>
+            <div class="quick-stat">
+              <strong id="hero-mode-label">Live</strong>
+              <span>Public hospital lookup</span>
+            </div>
+          </div>
+        </aside>
       </header>
 
       <main class="main-content">
-        <section class="search-card">
+        <section class="search-panel panel">
           <form id="search-form" class="search-form">
-            <label class="input-label" for="location-input">Enter any city or address</label>
-            <div class="input-row">
-              <input
-                id="location-input"
-                name="location"
-                type="text"
-                placeholder="Chicago, IL or 221B Baker Street, London"
-                autocomplete="off"
-                required
-              />
-              <button type="submit" id="search-button">Find Fastest ER</button>
+            <div class="field-group field-location">
+              <label class="input-label" for="location-input">Enter city or address</label>
+              <div class="input-row">
+                <input
+                  id="location-input"
+                  name="location"
+                  type="text"
+                  placeholder="London, Chicago, IL, or 221B Baker Street"
+                  autocomplete="off"
+                  required
+                />
+                <button type="submit" id="search-button">Find Fastest ER</button>
+              </div>
+            </div>
+
+            <div class="control-grid">
+              <div class="field-group">
+                <label class="input-label" for="urgency-select">Urgency</label>
+                <select id="urgency-select">
+                  <option value="mild">Mild</option>
+                  <option value="moderate" selected>Moderate</option>
+                  <option value="serious">Serious</option>
+                  <option value="critical">Critical</option>
+                </select>
+              </div>
+
+              <div class="field-group">
+                <label class="input-label" for="insurance-select">Insurance</label>
+                <select id="insurance-select">
+                  <option value="private" selected>Private</option>
+                  <option value="basic">Basic</option>
+                  <option value="government">Government</option>
+                  <option value="international">International</option>
+                  <option value="none">No insurance</option>
+                </select>
+              </div>
+
+              <div class="field-group">
+                <label class="input-label" for="transport-select">Arrival</label>
+                <select id="transport-select">
+                  <option value="car" selected>Car</option>
+                  <option value="walk">Walk</option>
+                  <option value="ambulance">Ambulance</option>
+                  <option value="rideshare">Rideshare</option>
+                </select>
+              </div>
             </div>
           </form>
+
+          <div class="example-row">
+            <span class="example-label">Try:</span>
+            <button class="example-chip" type="button" data-location="London">London</button>
+            <button class="example-chip" type="button" data-location="Paris">Paris</button>
+            <button class="example-chip" type="button" data-location="Chicago, IL">Chicago</button>
+            <button class="example-chip" type="button" data-location="Tokyo">Tokyo</button>
+          </div>
+
           <div id="meta" class="meta-text">
             Search to compare nearby emergency room options.
           </div>
         </section>
 
-        <section class="results-section">
+        <section class="summary-strip">
+          <article class="summary-card panel">
+            <span>Best Match</span>
+            <strong id="best-match-label">Waiting for search</strong>
+            <p id="best-match-copy">Your fastest nearby option will appear here.</p>
+          </article>
+
+          <article class="summary-card panel">
+            <span>Estimated Arrival Window</span>
+            <strong id="arrival-label">-</strong>
+            <p id="arrival-copy">Travel-aware timing appears after search.</p>
+          </article>
+
+          <article class="summary-card panel">
+            <span>Insurance Snapshot</span>
+            <strong id="cost-label">-</strong>
+            <p id="cost-copy">Out-of-pocket estimate updates with your coverage.</p>
+          </article>
+        </section>
+
+        <section class="results-section panel">
           <div class="results-header">
-            <h2>Nearby Hospitals</h2>
-            <p>Click any card to open the location in Google Maps.</p>
+            <div>
+              <h2>Nearby Hospitals</h2>
+              <p>Ranked by predicted speed, travel, and ER readiness.</p>
+            </div>
+            <div id="status-message" class="status-message"></div>
           </div>
 
-          <div id="status-message" class="status-message"></div>
           <div id="results" class="results-grid"></div>
         </section>
       </main>
