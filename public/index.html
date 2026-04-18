@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ER-Predict</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <div class="page-shell">
+      <header class="hero">
+        <div class="hero-copy">
+          <span class="eyebrow">Emergency Room Intelligence</span>
+          <h1>ER-Predict</h1>
+          <p>
+            Find nearby hospitals and compare smart ER wait time estimates in
+            seconds, with no API key required.
+          </p>
+        </div>
+        <div class="hero-panel">
+          <div class="hero-stat">
+            <strong>Top 5</strong>
+            <span>Nearby hospitals surfaced instantly</span>
+          </div>
+          <div class="hero-stat">
+            <strong>Live Search</strong>
+            <span>Worldwide address and city lookup</span>
+          </div>
+        </div>
+      </header>
+
+      <main class="main-content">
+        <section class="search-card">
+          <form id="search-form" class="search-form">
+            <label class="input-label" for="location-input">Enter any city or address</label>
+            <div class="input-row">
+              <input
+                id="location-input"
+                name="location"
+                type="text"
+                placeholder="Chicago, IL or 221B Baker Street, London"
+                autocomplete="off"
+                required
+              />
+              <button type="submit" id="search-button">Find Fastest ER</button>
+            </div>
+          </form>
+          <div id="meta" class="meta-text">Search to compare nearby emergency room options.</div>
+        </section>
+
+        <section class="results-section">
+          <div class="results-header">
+            <h2>Nearby Hospitals</h2>
+            <p>Click any card to open directions in Google Maps.</p>
+          </div>
+
+          <div id="status-message" class="status-message"></div>
+          <div id="results" class="results-grid"></div>
+        </section>
+      </main>
+    </div>
+
+    <script src="./app.js"></script>
+  </body>
+</html>

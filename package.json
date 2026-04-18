@@ -1,0 +1,21 @@
+{
+  "name": "er-predict",
+  "version": "1.0.0",
+  "description": "ER-Predict full-stack web app for finding nearby hospitals and estimating ER wait times.",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node --watch server.js"
+  },
+  "keywords": [
+    "express",
+    "google-places",
+    "emergency-room",
+    "hospital"
+  ],
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.19.2"
+  }
+}
